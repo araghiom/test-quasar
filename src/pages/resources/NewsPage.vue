@@ -1,17 +1,21 @@
 <template>
-  <q-page padding class="page-with-top-margin">
+  <q-page padding class="page-with-top-margin" style="background-color: #EEF1EF;">
     <resource-header title="News" />
 
     <div v-if="loading" class="row q-col-gutter-md">
-      <div v-for="n in 3" :key="n" class="col-12 col-md-4">
-        <q-card>
-          <q-skeleton height="200px" square />
-          <q-card-section>
-            <q-skeleton type="text" width="60%" />
-            <q-skeleton type="text" width="40%" />
+      <div 
+        v-for="n in 3" 
+        :key="n" 
+        class="col-12 col-sm-6 col-md-4 q-mb-md"
+      >
+        <q-card class="full-width">
+          <q-skeleton height="200px" class="full-width" square />
+          <q-card-section class="full-width">
+            <q-skeleton type="text" width="60%" class="full-width" />
+            <q-skeleton type="text" width="40%" class="full-width" />
           </q-card-section>
-          <q-card-actions>
-            <q-skeleton type="QBtn" />
+          <q-card-actions class="full-width">
+            <q-skeleton type="QBtn" class="full-width" />
           </q-card-actions>
         </q-card>
       </div>
@@ -83,12 +87,10 @@ export default {
     ])
 
     const readMore = (article) => {
-      // Placeholder for article detail navigation
       console.log('Read more about:', article.title)
     }
 
     onMounted(() => {
-      // Simulate loading
       setTimeout(() => {
         loading.value = false
       }, 1000)
@@ -105,6 +107,15 @@ export default {
 
 <style scoped>
 .page-with-top-margin {
-  margin-top: 100px;
+  background-color: #EEF1EF;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+.loading-card {
+  width: 100%;
+  height: 100%;
 }
 </style> 

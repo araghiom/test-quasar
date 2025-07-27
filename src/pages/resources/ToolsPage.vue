@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="page-with-top-margin">
+  <q-page padding class="page-with-top-margin" style="background-color: #EEF1EF;">
     <resource-header title="Tools and Guides" />
 
     <div class="row q-col-gutter-md">
@@ -130,6 +130,6 @@ export default {
 
 <style scoped>
 .page-with-top-margin {
-  margin-top: 100px;
+  background-color: #EEF1EF;
 }
 </style> 
