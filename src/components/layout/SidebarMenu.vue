@@ -1,74 +1,100 @@
 <template>
-  <q-drawer 
-    v-model="leftDrawerOpen"
-    show-if-above
-    bordered
-    class="bg-white"
-    :width="250"
-    :style="{ paddingTop: '200px' }"
-  >
-    <q-list>
-      <q-item-label header>Resources Overview</q-item-label>
+  <div class="sidebar-menu">
+    <q-list class="grid-container">
+      <div class="resources-section">
+        <q-item-label header>Resources Overview</q-item-label>
+        
+        <div class="grid-items">
+          <q-item 
+            v-for="item in resourcesOverview" 
+            :key="item.id"
+            clickable 
+            :to="item.route"
+            class="grid-item"
+          >
+            <q-item-section avatar>
+              <q-icon :name="item.icon" />
+            </q-item-section>
+            <q-item-section>{{ item.label }}</q-item-section>
+          </q-item>
+        </div>
+      </div>
       
-      <q-item 
-        v-for="item in resourcesOverview" 
-        :key="item.id"
-        clickable 
-        :to="item.route"
-      >
-        <q-item-section avatar>
-          <q-icon :name="item.icon" />
-        </q-item-section>
-        <q-item-section>{{ item.label }}</q-item-section>
-      </q-item>
-      
-      <q-item-label header>Related Sites</q-item-label>
-      
-      <q-item 
-        v-for="item in relatedSites" 
-        :key="item.id"
-        clickable 
-        :to="item.route"
-      >
-        <q-item-section avatar>
-          <q-icon :name="item.icon" />
-        </q-item-section>
-        <q-item-section>{{ item.label }}</q-item-section>
-      </q-item>
+      <div class="related-sites-section">
+        <q-item-label header>Related Sites</q-item-label>
+        
+        <div class="grid-items">
+          <q-item 
+            v-for="item in relatedSites" 
+            :key="item.id"
+            clickable 
+            :to="item.route"
+            class="grid-item"
+          >
+            <q-item-section avatar>
+              <q-icon :name="item.icon" />
+            </q-item-section>
+            <q-item-section>{{ item.label }}</q-item-section>
+          </q-item>
+        </div>
+      </div>
     </q-list>
-  </q-drawer>
+  </div>
 </template>
 
 <script>
-import { ref } from 'vue'
 import { SIDEBAR_MENU } from '@/constants/sidebarMenu'
 
 export default {
   name: 'SidebarMenu',
   setup() {
-    const leftDrawerOpen = ref(true)
     const resourcesOverview = SIDEBAR_MENU.RESOURCES_OVERVIEW
     const relatedSites = SIDEBAR_MENU.RELATED_SITES
 
-    const toggleLeftDrawer = () => {
-      leftDrawerOpen.value = !leftDrawerOpen.value
-    }
-
     return {
-      leftDrawerOpen,
       resourcesOverview,
-      relatedSites,
-      toggleLeftDrawer
+      relatedSites
     }
   }
 }
-</script> 
+</script>
 
 <style scoped>
-.q-item {
+.sidebar-menu {
+  width: 100%;
+  display: block;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+.resources-section,
+.related-sites-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
   transition: background-color 0.3s ease;
 }
-.q-item:hover {
+
+.grid-item:hover {
   background-color: rgba(0,0,0,0.05);
+}
+
+.q-item-label {
+  margin-bottom: 8px;
 }
 </style> 

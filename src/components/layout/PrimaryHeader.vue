@@ -1,7 +1,6 @@
 <template>
-  <q-header 
-    class="bg-primary text-white" 
-    style="height: 100px; min-height: 100px;"
+  <div 
+    class="primary-header bg-primary text-white" 
   >
     <q-toolbar class="full-height">
       <q-toolbar-title class="full-width">
@@ -77,39 +76,39 @@
         </div>
       </q-toolbar-title>
     </q-toolbar>
-  </q-header>
 
-  <q-dialog v-model="showSearchDialog">
-    <q-card style="width: 500px">
-      <q-card-section>
-        <div class="text-h6">Search</div>
-      </q-card-section>
+    <q-dialog v-model="showSearchDialog">
+      <q-card style="width: 500px">
+        <q-card-section>
+          <div class="text-h6">Search</div>
+        </q-card-section>
 
-      <q-card-section>
-        <q-input 
-          v-model="searchQuery" 
-          outlined 
-          placeholder="Enter search terms"
-          @keyup.enter="performSearch"
-        >
-          <template v-slot:append>
-            <q-btn 
-              flat 
-              round 
-              dense 
-              icon="search" 
-              @click="performSearch"
-            />
-          </template>
-        </q-input>
-      </q-card-section>
+        <q-card-section>
+          <q-input 
+            v-model="searchQuery" 
+            outlined 
+            placeholder="Enter search terms"
+            @keyup.enter="performSearch"
+          >
+            <template v-slot:append>
+              <q-btn 
+                flat 
+                round 
+                dense 
+                icon="search" 
+                @click="performSearch"
+              />
+            </template>
+          </q-input>
+        </q-card-section>
 
-      <q-card-actions align="right">
-        <q-btn flat label="Cancel" color="primary" v-close-popup />
-        <q-btn flat label="Search" color="primary" @click="performSearch" />
-      </q-card-actions>
-    </q-card>
-  </q-dialog>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="primary" v-close-popup />
+          <q-btn flat label="Search" color="primary" @click="performSearch" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
 
 <script>
@@ -138,9 +137,17 @@ export default {
 </script>
 
 <style scoped>
+.primary-header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
 .full-height {
   height: 100%;
 }
+
 .full-width {
   width: 100%;
 }

@@ -1,7 +1,7 @@
 <template>
-  <q-header 
-    class="bg-secondary text-white" 
-    style="top: 100px; height: 50px; min-height: 50px;"
+  <div 
+    class="secondary-header bg-secondary text-white" 
+    style="height: 50px; min-height: 50px;"
   >
     <q-toolbar class="full-height">
       <q-toolbar-title class="full-width row items-center justify-between" style="padding-left: 100px;">
@@ -21,6 +21,7 @@
                   clickable 
                   v-close-popup 
                   @click="selectSubMenuItem(category, subItem)"
+                  :to="subItem.route"
                 >
                   <q-item-section avatar>
                     <q-icon :name="subItem.icon" />
@@ -35,97 +36,17 @@
         </div>
       </q-toolbar-title>
     </q-toolbar>
-  </q-header>
+  </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { HEADER_CATEGORIES } from '@/constants/headerCategories'
 
 export default {
   name: 'SecondaryHeader',
   setup() {
-    const categories = [
-      {
-        id: 1,
-        label: 'Get Certified',
-        items: [
-          { 
-            id: 1, 
-            label: 'Certification Levels', 
-            icon: 'school' 
-          },
-          { 
-            id: 2, 
-            label: 'Exam Preparation', 
-            icon: 'book' 
-          }
-        ]
-      },
-      {
-        id: 2,
-        label: 'Explore Occupations',
-        items: [
-          { 
-            id: 1, 
-            label: 'Career Paths', 
-            icon: 'work' 
-          },
-          { 
-            id: 2, 
-            label: 'Job Market Insights', 
-            icon: 'insights' 
-          }
-        ]
-      },
-      {
-        id: 3,
-        label: 'Develop Professionally',
-        items: [
-          { 
-            id: 1, 
-            label: 'Training Programs', 
-            icon: 'trending_up' 
-          },
-          { 
-            id: 2, 
-            label: 'Skill Development', 
-            icon: 'psychology' 
-          }
-        ]
-      },
-      {
-        id: 4,
-        label: 'Resources',
-        items: [
-          { 
-            id: 1, 
-            label: 'Learning Materials', 
-            icon: 'library_books' 
-          },
-          { 
-            id: 2, 
-            label: 'Community Forums', 
-            icon: 'forum' 
-          }
-        ]
-      },
-      {
-        id: 5,
-        label: 'Support',
-        items: [
-          { 
-            id: 1, 
-            label: 'Help Center', 
-            icon: 'help' 
-          },
-          { 
-            id: 2, 
-            label: 'Contact Support', 
-            icon: 'contact_support' 
-          }
-        ]
-      }
-    ]
+    const categories = HEADER_CATEGORIES
 
     const selectedSubMenuItems = ref({})
 
@@ -144,6 +65,11 @@ export default {
 </script>
 
 <style scoped>
+.secondary-header {
+  height: 50px;
+
+}
+
 .full-width {
   width: 100%;
 }
