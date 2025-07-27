@@ -1,10 +1,12 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <layout-primary-header />
-    <layout-secondary-header />
-    <layout-sidebar-menu />
+  <q-layout view="hHh lpR fFf" class="flex flex-column fixed-layout">
+    <header class="flex-none">
+      <layout-primary-header />
+      <layout-secondary-header />
+      <layout-sidebar-menu />
+    </header>
     
-    <q-page-container>
+    <q-page-container class="flex-grow overflow-auto w-full">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -12,7 +14,9 @@
       </router-view>
     </q-page-container>
 
-    <layout-app-footer />
+    <footer class="flex-none">
+      <comment-footer />
+    </footer>
   </q-layout>
 </template>
 
@@ -28,12 +32,28 @@ export default {
     LayoutPrimaryHeader,
     LayoutSecondaryHeader,
     LayoutSidebarMenu,
-    LayoutAppFooter
+    LayoutAppFooter,
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.fixed-layout {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.overflow-auto {
+  overflow-y: auto;
+  height: calc(100vh - (header height + footer height));
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
