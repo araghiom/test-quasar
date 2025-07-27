@@ -23,40 +23,23 @@
         :key="article.id" 
         class="col-4"
       >
-        <q-card class="news-card">
-          <div class="news-card-header flex items-center q-pa-md">
-            <q-icon name="article" size="24px" class="q-mr-md" />
-            <div class="text-h6">{{ article.title }}</div>
-          </div>
-          
-          <q-separator />
-          
-          <q-card-section>
-            <div class="row">
-              <div class="col-12 q-pr-md">
-                <q-img 
-                  :src="article.image" 
-                  class="rounded-borders"
-                  height="200px"
-                />
-              </div>
-              <div class="col-12">
-                <div class="text-subtitle2 text-grey q-mb-sm">{{ article.date }}</div>
-                <div class="text-body1">{{ article.summary }}</div>
-                
-                <div class="q-mt-md">
-                  <q-btn 
-                    flat 
-                    color="primary" 
-                    @click="readMore(article)"
-                  >
-                    Read More
-                  </q-btn>
-                </div>
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
+        <base-card
+          :image="article.image"
+          :title="article.title"
+          :date="article.date"
+          :description="article.summary"
+          icon="article"
+        >
+          <template #actions>
+            <q-btn 
+              flat 
+              color="primary" 
+              @click="readMore(article)"
+            >
+              Read More
+            </q-btn>
+          </template>
+        </base-card>
       </div>
     </div>
   </q-page>
@@ -65,11 +48,13 @@
 <script>
 import { ref, onMounted } from 'vue'
 import ResourceHeader from '@/components/ResourceHeader.vue'
+import BaseCard from '@/components/base/BaseCard.vue'
 
 export default {
   name: 'NewsPage',
   components: {
-    ResourceHeader
+    ResourceHeader,
+    BaseCard
   },
   setup() {
     const loading = ref(true)
@@ -121,30 +106,5 @@ export default {
 <style scoped>
 .page-with-top-margin {
   margin-top: 100px;
-}
-
-.news-card {
-  margin-bottom: 16px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.news-card-header {
-  background-color: #f5f5f5;
-}
-
-.rounded-borders {
-  border-radius: 8px;
-}
-
-.position-relative {
-  position: relative;
-}
-
-.absolute-left {
-  position: absolute;
-  left: 24px;
-  top: 50%;
-  transform: translateY(-50%);
 }
 </style> 

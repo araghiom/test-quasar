@@ -1,21 +1,33 @@
 <template>
-  <q-card 
-    :class="['base-card', cardClasses]" 
-    :flat="flat"
-    :bordered="bordered"
-    :hover="hover"
-  >
-    <q-card-section v-if="title" class="card-header">
-      <div class="text-h6">{{ title }}</div>
+  <q-card class="base-card">
+    
+    <q-card-section class="base-card-header">
+      <div class="flex items-center">
+        <q-icon :name="icon" size="24px" class="q-mr-md" />
+        <div class="text-h6">{{ title }}</div>
+      </div>
     </q-card-section>
-
+    
+    <q-img 
+      v-if="image"
+      :src="image" 
+      class="base-card-image"
+      height="300px"
+    />
+    <q-separator />
+    
     <q-card-section>
-      <slot></slot>
+      <div class="row">
+        <div class="col-12">
+          <div v-if="date" class="text-subtitle2 text-grey q-mb-sm">{{ date }}</div>
+          <div class="text-body1">{{ description }}</div>
+          
+          <div class="q-mt-md" v-if="$slots.actions">
+            <slot name="actions"></slot>
+          </div>
+        </div>
+      </div>
     </q-card-section>
-
-    <q-card-actions v-if="$slots.actions" align="right">
-      <slot name="actions"></slot>
-    </q-card-actions>
   </q-card>
 </template>
 
@@ -23,25 +35,25 @@
 export default {
   name: 'BaseCard',
   props: {
+    image: {
+      type: String,
+      default: null
+    },
+    icon: {
+      type: String,
+      default: 'article'
+    },
     title: {
       type: String,
-      default: ''
+      required: true
     },
-    flat: {
-      type: Boolean,
-      default: false
+    date: {
+      type: String,
+      default: null
     },
-    bordered: {
-      type: Boolean,
-      default: true
-    },
-    hover: {
-      type: Boolean,
-      default: false
-    },
-    cardClasses: {
-      type: [String, Array],
-      default: ''
+    description: {
+      type: String,
+      required: true
     }
   }
 }
@@ -49,13 +61,16 @@ export default {
 
 <style scoped>
 .base-card {
-  transition: all 0.3s ease;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
 }
-.base-card.hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+.base-card-header {
+  background-color: #f5f5f5;
 }
-.card-header {
-  background-color: rgba(0,0,0,0.05);
+
+.base-card-image {
+  object-fit: cover;
 }
 </style> 

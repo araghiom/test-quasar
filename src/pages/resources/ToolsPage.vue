@@ -8,22 +8,15 @@
         :key="tool.id" 
         class="col-12 col-md-4"
       >
-        <q-card hover>
-          <q-img 
-            :src="`https://picsum.photos/500/300?random=${tool.id}`" 
-            height="200px"
-          />
-          
-          <q-card-section>
-            <div class="text-h6">{{ tool.title }}</div>
-            <div class="text-subtitle2 text-grey">{{ tool.category }}</div>
-          </q-card-section>
-          
-          <q-card-section>
-            <p>{{ tool.description }}</p>
-          </q-card-section>
-          
-          <q-card-actions align="right">
+        <base-card
+          :image="`https://picsum.photos/500/300?random=${tool.id}`"
+          :title="tool.title"
+          :description="tool.description"
+          :icon="tool.icon || 'build'"
+          :date="tool.category"
+          :list="tool.features"
+        >
+          <template #actions>
             <q-btn 
               flat 
               color="primary" 
@@ -32,8 +25,8 @@
             >
               Access Tool
             </q-btn>
-          </q-card-actions>
-        </q-card>
+          </template>
+        </base-card>
       </div>
     </div>
   </q-page>
@@ -41,11 +34,13 @@
 
 <script>
 import ResourceHeader from '@/components/ResourceHeader.vue'
+import BaseCard from '@/components/base/BaseCard.vue'
 
 export default {
   name: 'ToolsPage',
   components: {
-    ResourceHeader
+    ResourceHeader,
+    BaseCard
   },
   setup() {
     const tools = [
@@ -54,21 +49,75 @@ export default {
         title: 'Professional Development Toolkit',
         category: 'Career Growth',
         description: 'Comprehensive resources for professional skill enhancement.',
-        link: '#'
+        link: '#',
+        icon: 'work',
+        features: [
+          { 
+            label: 'Skill Assessment', 
+            icon: 'analytics',
+            caption: 'Identify your strengths and weaknesses'
+          },
+          { 
+            label: 'Learning Paths', 
+            icon: 'school',
+            caption: 'Personalized career development routes'
+          },
+          { 
+            label: 'Progress Tracking', 
+            icon: 'track_changes',
+            caption: 'Monitor your professional growth'
+          }
+        ]
       },
       {
         id: 2,
         title: 'Learning Management System',
         category: 'Education',
         description: 'Online platform for continuous learning and training.',
-        link: '#'
+        link: '#',
+        icon: 'school',
+        features: [
+          { 
+            label: 'Course Library', 
+            icon: 'library_books',
+            caption: 'Extensive range of online courses'
+          },
+          { 
+            label: 'Interactive Modules', 
+            icon: 'computer',
+            caption: 'Engaging learning experiences'
+          },
+          { 
+            label: 'Certification', 
+            icon: 'verified',
+            caption: 'Earn professional certificates'
+          }
+        ]
       },
       {
         id: 3,
         title: 'Career Assessment Tool',
         category: 'Personal Development',
         description: 'Detailed career path and skill gap analysis.',
-        link: '#'
+        link: '#',
+        icon: 'analytics',
+        features: [
+          { 
+            label: 'Personality Assessment', 
+            icon: 'psychology',
+            caption: 'Understand your work style'
+          },
+          { 
+            label: 'Career Matching', 
+            icon: 'work',
+            caption: 'Find ideal career opportunities'
+          },
+          { 
+            label: 'Skill Gap Analysis', 
+            icon: 'trending_up',
+            caption: 'Identify areas for improvement'
+          }
+        ]
       }
     ]
 

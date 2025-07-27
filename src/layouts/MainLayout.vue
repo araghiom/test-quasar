@@ -15,7 +15,7 @@
     </q-page-container>
 
     <footer class="flex-none">
-      <comment-footer />
+  <layout-app-footer />
     </footer>
   </q-layout>
 </template>
