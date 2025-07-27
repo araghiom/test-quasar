@@ -18,10 +18,7 @@ const routes = [
         path: 'resources/news',
         component: () => import('@/pages/resources/NewsPage.vue')
       },
-      {
-        path: 'resources/sites',
-        component: () => import('@/pages/resources/SitesPage.vue')
-      }
+ 
     ]
   }
 ]
